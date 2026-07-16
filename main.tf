@@ -43,7 +43,8 @@ resource "aws_security_group" "workstation" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      =  ["${chomp(data.http.my_public_ip.response_body)}/32"]
+    cidr_blocks      = ["0.0.0.0/0"]
+    #cidr_blocks      =  ["${chomp(data.http.my_public_ip.response_body)}/32"]
   }
 
   tags = merge(
