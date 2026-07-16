@@ -6,7 +6,9 @@ resource "aws_instance" "workstation" {
     aws_access_key = var.aws_access_key
     aws_secret_key = var.aws_secret_key
   })
-
+  # Recreate the EC2 whenever user_data changes
+  user_data_replace_on_change = true
+  
   root_block_device {
     volume_size = 50
     volume_type = "gp3"
