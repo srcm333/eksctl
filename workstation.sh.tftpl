@@ -45,28 +45,34 @@ chown -R ec2-user:ec2-user /home/ec2-user/.aws
 chmod 600 /home/ec2-user/.aws/credentials
 chmod 600 /home/ec2-user/.aws/config
 #
-## Clone eksctl repo and create EKS cluster
-#cd /home/ec2-user
-#cd /home/ec2-user
-#sudo -u ec2-user git clone https://github.com/srcm333/eksctl.git
-#cd eksctl
-#sudo -u ec2-user /usr/local/bin/eksctl create cluster -f eksctl.yaml
-#
-## Authenticate kubectl with the cluster
-#sudo -u ec2-user aws eks update-kubeconfig --region us-east-1 --name roboshop
-#sudo -u ec2-user /usr/local/bin/kubectl get nodes
-#
-sudo -u ec2-user bash <<'EOF'
+# Clone eksctl repo and create EKS cluster
 cd /home/ec2-user
-
+cd /home/ec2-user
 if [ -d eksctl ]; then
     rm -rf eksctl
 fi
 
-git clone https://github.com/srcm333/eksctl.git
+sudo -u ec2-user git clone https://github.com/srcm333/eksctl.git
 cd eksctl
-eksctl create cluster -f eksctl.yaml
+sudo -u ec2-user /usr/local/bin/eksctl create cluster -f eksctl.yaml
 
-aws eks update-kubeconfig --region us-east-1 --name roboshop
-kubectl get nodes
-EOF
+# Authenticate kubectl with the cluster
+sudo -u ec2-user aws eks update-kubeconfig --region us-east-1 --name roboshop
+sudo -u ec2-user /usr/local/bin/kubectl get nodes
+
+
+#############################
+#sudo -u ec2-user bash <<'EOF'
+#cd /home/ec2-user
+#
+#if [ -d eksctl ]; then
+#    rm -rf eksctl
+#fi
+#
+#git clone https://github.com/srcm333/eksctl.git
+#cd eksctl
+#eksctl create cluster -f eksctl.yaml
+#
+#aws eks update-kubeconfig --region us-east-1 --name roboshop
+#kubectl get nodes
+#EOF
